@@ -1,0 +1,102 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Gestion des Vacations</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <div class="media-body text-center" style="display: inline-block; margin-right:10px">
+              <h4 class="mt-0 mb-5" style="color: #f02138;margin-bottom: 0px!important;"> {{VacationsFiltered$.length}} </h4>
+              <small>User(s)</small>
+            </div>
+            <div class="media-body text-center" style="display: inline-block; ">
+              <button class="btn btn-sm btn-success" (click)='addVacation()' style="margin-bottom: 35px;">
+                <i class="nav-icon fas fa-plus"></i>Ajouter
+              </button>
+            </div>
+  
+  
+  
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+  
+  
+            <div class="card">
+              <div class="card-body">
+                <p>filtre</p>
+                <div class="form-group" style="display: flex;">
+                <input class='form-control'  (keyup)="searchVacations()" [(ngModel)]="search" placeholder="Rechercher" style="border-radius:0.2rem 0 0 0.2rem;">
+                <button class="btn btn-sm btn-danger" style="border-radius: 0 0.2rem 0.2rem 0;padding: 7px 20px;"  >
+                  <i class="nav-icon fas fa-search"></i>
+                </button>
+                <button class="btn btn-sm btn-success" 
+                  style="padding: 7px 20px;    margin-left: 15px;"  (click)="exportAsXLSX()" >
+                    <i class="nav-icon fas fa-file-excel"></i>
+                  </button>
+                </div>
+                
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th>Date Debut Vacation</th>
+                      <th>Date Fin Vacation</th>
+                      <th>username</th>
+                      <th>Action</th>
+  
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let vacation of VacationsFiltered$| paginate: { itemsPerPage: nbItems, currentPage: p }">
+                      <th>{{ vacation.start}}</th>
+                      <th>{{ vacation.end}}</th>
+                      <th>{{ vacation.user.username}}</th>
+
+                     
+                      <td>
+                        <button class="btn btn-sm btn-danger" style="margin-right: 14px;" (click)="Delete(vacation.id)">
+                          <i class="nav-icon fas fa-trash"></i>
+                        </button>
+  
+                        <button class="btn btn-sm btn-info" (click)="UpdateVacation(vacation.id)">
+                          <i class="nav-icon fas fa-pencil-alt"></i>
+                        </button>
+  
+                      </td>
+                    </tr>
+  
+                  </tbody>
+                </table>
+                <div class="row" style="    float: right; 
+                padding-top: 50px;" *ngIf='VacationsFiltered$.length>nbItems'>
+                  <pagination-controls class="paginator" previousLabel="" nextLabel="" 
+                  (pageChange)="p = $event">
+                  </pagination-controls>
+  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>

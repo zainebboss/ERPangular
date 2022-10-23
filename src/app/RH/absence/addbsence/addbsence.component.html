@@ -1,0 +1,67 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>Ajout Absence</h1>
+          </div>
+  
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+  
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form [formGroup]="AbsenceForm" (ngSubmit)="onSubmit()">
+                <div class="card-body"> 
+                  <!-- Date  -->
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label><br>
+                    <mat-form-field appearance="fill">
+                      <input matInput [matDatepicker]="picker" id="date" formControlName="date"
+                        [ngClass]="{ 'is-invalid':  form['date'].touched && form['date'].errors}">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-error *ngIf="form['date'].touched && form['date'].errors">
+                      <div *ngIf="form['date'].errors?.['required']">
+                        <i class="fa fa-exclamation-circle mr-1"></i>
+                        <span>Veuillez insérer votre date</span>
+                      </div>
+  
+                    </mat-error>
+                  </div>
+                 
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+  
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
